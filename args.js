@@ -111,10 +111,11 @@ Function.prototype.curry = function(numArgs) {
 
     function _curriedSum(el) {
         nums.push(el);
-
+        // debugger
         if (nums.length === numArgs) {
             // return func(...nums);
-            return this.apply(this, nums);
+        
+            return func.apply("banana", nums);
         } else {
             return _curriedSum;
         }
