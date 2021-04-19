@@ -1,15 +1,15 @@
 // sum
 
 // arguments keyword
-// function sum() {
-//     let total = 0;
+function summed() {
+    let total = 0;
 
-//     for (let i = 0; i < arguments.length; i++) {
-//         total += arguments[i];
-//     }
+    for (let i = 0; i < arguments.length; i++) {
+        total += arguments[i];
+    }
 
-//     return total;
-// }
+    return total;
+}
 
 // rest operator
 // function sum(...nums) {
@@ -73,39 +73,62 @@ Function.prototype.myBind = function(context, ...bindTimeArgs) {
 
 // curriedSum
 
-function curriedSum (numArgs) {
-    const nums = [];
+// function curriedSum (numArgs) {
+//     const nums = [];
     
-    function _curriedSum(el) {
-        nums.push(el);
-        debugger 
-        if (nums.length === numArgs) {
-            return nums.reduce(function(acc, value) {acc + value});
-        } else {
-            return _curriedSum;
-        }
-    }
-   return _curriedSum;
-};
+//     function _curriedSum(el) {
+//         nums.push(el);
+//         // debugger 
+//         if (nums.length === numArgs) {
+            
+//             let total = 0;
 
+//             for (let i = 0; i < nums.length; i++) {
+//                 total += nums[i];
+//             }
 
-// Define an empty array, numbers.
-
-// Defines a function, _curriedSum that:
-
-// Closes over numArgs and numbers.
-
-// Takes a single number as an argument.
-
-// Appends this to numbers each time.
-
-// If numbers.length === numArgs, it sums the numbers in the array and returns the result.
-//     Else, it returns itself.
-
-// Returns _curriedSum.
+//             return total;
+//             // return summed(...nums);
+            
+//         } else {
+//             return _curriedSum;
+//         }
+//     }
+//    return _curriedSum;
+// };
 
 
 // example
 
-const sum = curriedSum(4);
-sum(5)(30)(20)(1); // => 56
+// const sum = curriedSum(4);
+// console.log(sum(5)(30)(20)(1)); // => 56
+
+// Function.prototype.curry
+
+Function.prototype.curry = function(numArgs) {
+    const nums = [];
+    const func = this;
+
+    function _curriedSum(el) {
+        nums.push(el);
+
+        if (nums.length === numArgs) {
+            // return func(...nums);
+            return this.apply(this, nums);
+        } else {
+            return _curriedSum;
+        }
+    }
+
+    return _curriedSum;
+};
+
+console.log(summed.curry(4)(5)(30)(20)(1)); // 56
+
+// Collect up arguments until there are numArgs of them,
+
+// If there are too few arguments still, it should return itself.
+
+// When there are numArgs arguments, it should call the original function.
+
+// Write a version that uses Function.prototype.apply and another one that uses ... (the spread operator).
