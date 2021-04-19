@@ -42,6 +42,7 @@ function summed() {
 // ... rest operator
 Function.prototype.myBind = function(context, ...bindTimeArgs) {
     let that = this;  //#bidning to the context
+    // Array.from(bindTimeArgs);
     return function(...callTimeArgs) {
         return that.call(context, ...bindTimeArgs, ...callTimeArgs);
     }
@@ -73,29 +74,29 @@ Function.prototype.myBind = function(context, ...bindTimeArgs) {
 
 // curriedSum
 
-// function curriedSum (numArgs) {
-//     const nums = [];
+function curriedSum (numArgs) {
+    const nums = [];
     
-//     function _curriedSum(el) {
-//         nums.push(el);
-//         // debugger 
-//         if (nums.length === numArgs) {
+    function _curriedSum(el) {
+        nums.push(el);
+        // debugger 
+        if (nums.length === numArgs) {
             
-//             let total = 0;
+            let total = 0;
 
-//             for (let i = 0; i < nums.length; i++) {
-//                 total += nums[i];
-//             }
+            for (let i = 0; i < nums.length; i++) {
+                total += nums[i];
+            }
 
-//             return total;
-//             // return summed(...nums);
+            return total;
+            // return summed(...nums);
             
-//         } else {
-//             return _curriedSum;
-//         }
-//     }
-//    return _curriedSum;
-// };
+        } else {
+            return _curriedSum;
+        }
+    }
+   return _curriedSum;
+};
 
 
 // example
