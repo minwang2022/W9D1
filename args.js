@@ -47,26 +47,64 @@ Function.prototype.myBind = function(context, ...bindTimeArgs) {
     }
 };
 // examples 
-class Cat {
-    constructor(name) {
-        this.name = name;
-    }
+// class Cat {
+//     constructor(name) {
+//         this.name = name;
+//     }
 
-    says(sound, person) {
-        console.log(`${this.name} says ${sound} to ${person}!`);
-        return true;
-    }
-}
+//     says(sound, person) {
+//         console.log(`${this.name} says ${sound} to ${person}!`);
+//         return true;
+//     }
+// }
 
-class Dog {
-    constructor(name) {
-        this.name = name;
-    }
-}
+// class Dog {
+//     constructor(name) {
+//         this.name = name;
+//     }
+// }
 
-const markov = new Cat("Markov");
-const pavlov = new Dog("Pavlov");
+// const markov = new Cat("Markov");
+// const pavlov = new Dog("Pavlov");
 
-markov.says("meow", "Ned");
+// markov.says("meow", "Ned");
 
-markov.says.myBind(pavlov, "meow", "Kush")();
+// markov.says.myBind(pavlov, "meow", "Kush")();
+
+// curriedSum
+
+Function.prototype.curriedSum = function(numArgs) {
+    const nums = [];
+
+    return function _curry(el) {
+        nums.push(el);
+
+        if (nums.length === numArgs) {
+            return sum(nums);
+        } else {
+            return _curry;
+        }
+    };
+};
+
+
+// Define an empty array, numbers.
+
+// Defines a function, _curriedSum that:
+
+// Closes over numArgs and numbers.
+
+// Takes a single number as an argument.
+
+// Appends this to numbers each time.
+
+// If numbers.length === numArgs, it sums the numbers in the array and returns the result.
+//     Else, it returns itself.
+
+// Returns _curriedSum.
+
+
+// example
+
+const sum = curriedSum(4);
+console.log(sum(5)(30)(20)(1)); // => 56
