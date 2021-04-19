@@ -1,15 +1,15 @@
 // sum
 
 // arguments keyword
-function sum() {
-    let total = 0;
+// function sum() {
+//     let total = 0;
 
-    for (let i = 0; i < arguments.length; i++) {
-        total += arguments[i];
-    }
+//     for (let i = 0; i < arguments.length; i++) {
+//         total += arguments[i];
+//     }
 
-    return total;
-}
+//     return total;
+// }
 
 // rest operator
 // function sum(...nums) {
@@ -73,18 +73,19 @@ Function.prototype.myBind = function(context, ...bindTimeArgs) {
 
 // curriedSum
 
-Function.prototype.curriedSum = function(numArgs) {
+function curriedSum (numArgs) {
     const nums = [];
-
-    return function _curry(el) {
+    
+    function _curriedSum(el) {
         nums.push(el);
-
+        debugger 
         if (nums.length === numArgs) {
-            return sum(nums);
+            return nums.reduce(function(acc, value) {acc + value});
         } else {
-            return _curry;
+            return _curriedSum;
         }
-    };
+    }
+   return _curriedSum;
 };
 
 
@@ -107,4 +108,4 @@ Function.prototype.curriedSum = function(numArgs) {
 // example
 
 const sum = curriedSum(4);
-console.log(sum(5)(30)(20)(1)); // => 56
+sum(5)(30)(20)(1); // => 56
