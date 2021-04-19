@@ -30,11 +30,23 @@ function sum() {
 
 
 // arguments keyword
-Function.prototype.myBind = function() {
-    debugger
-};
+// Function.prototype.myBind = function() {
+//     const context = arguments[0];
+//     const args = Array.from(arguments).slice(1);
+//     let that = this;  //#bidning to the context
+//     return function() {
+//         return that.apply(context, args)
+//     }
+// };
 
-// examples
+// ... rest operator
+Function.prototype.myBind = function(context, ...bindTimeArgs) {
+    let that = this;  //#bidning to the context
+    return function(...callTimeArgs) {
+        return that.call(context, ...bindTimeArgs, ...callTimeArgs);
+    }
+};
+// examples 
 class Cat {
     constructor(name) {
         this.name = name;
